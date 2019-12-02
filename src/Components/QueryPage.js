@@ -39,10 +39,13 @@ class QueryPage extends Component{
 	renderResults = () => {
 		if (this.state.loading)
 			return (
-				<span>Loading
+				<div>
+				<div>Loading</div>
 				<img alt="loading..." src={loading} />
-				</span>
+				</div>
 			)
+		else if (this.state.response.length === 0)
+				return <div>No Results Found</div>
 		else
 			return (<List className="Results">
 						{this.state.response.map((name) => 

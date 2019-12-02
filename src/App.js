@@ -3,7 +3,6 @@ import {
 	BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'; 
 import './App.css';
 import QueryPage from './Components/QueryPage';
-import Home from './Components/Home'
 import clout from './clout.png';
 import Rclout from './Rclout.png';
 
@@ -54,7 +53,7 @@ class App extends Component {
 					</div>
 					<Switch>
 						<Route exact path="/">
-							<Home />
+							<div />
 						</Route>
 						<Route path="/CreatorsFromCreator">
 							<QueryPage {...this.cfcdata}/>
