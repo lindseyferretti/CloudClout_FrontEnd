@@ -1,0 +1,35 @@
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.SearchBox {
+    padding-right: 16px !important;
+    display: inline-flex;
+}
+.SearchButton {
+    color: yellowgreen;
+    background-color: #333;
+    height: 18px;
+    width: 48px;
+    padding: 8px;
+    border: yellowgreen 1px solid;
+    border-radius: 5px;
+    font-size: 18px;
+    display: inline-flex;
+    align-self: center;
+}
+.SearchButton:hover {
+    cursor: pointer;
+    background-color: yellowgreen;
+    color: #333;
+}
+
+.Results {
+  columns: 3;
+  -webkit-columns: 3;
+  -moz-columns: 3;
+  column-fill: auto;
+  text-align: center;
+  list-style: inside;
+}

@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import Container from '@material-ui/core/Container';
-import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
+import './QueryPage.css';
+import loading from "../loading.gif";
 
 class QueryPage extends Component{
 	constructor() {
@@ -15,7 +16,9 @@ class QueryPage extends Component{
 		this.setState({textbox: event.target.value});
 	}
 
+
 	makeRequest = async () => {
+		this.setState({hasMadeRequest: true, loading: true})
 		let data = {
 			method: "POST",
 			mode: 'cors',
@@ -29,9 +32,22 @@ class QueryPage extends Component{
 				return response.json();
 			})
 			.then(json => {
-				console.log(json)
-				this.setState({response: json.body})
+				this.setState({response: json, loading: false})
 			})
+	}
+
+	renderResults = () => {
+		if (this.state.loading)
+			return (
+				<span>Loading
+				<img alt="loading..." src={loading} />
+				</span>
+			)
+		else
+			return (<List className="Results">
+						{this.state.response.map((name) => 
+						<ListItem>{name}</ListItem>)}
+					</List>)
 	}
 
 	render(){
@@ -39,15 +55,14 @@ class QueryPage extends Component{
         <div>
 			<Container>
 				<h1>{this.props.titleString}</h1>
-				<TextField id="outlined-basic" value={this.state.textbox} onChange={this.updateTextBox} variant="outlined" />
-				<Button variant="contained" color="primary" onClick={this.makeRequest}>
-					Search
-				</Button>
-				{this.state.response ? 
-				<List>
-					{this.state.response.map((name) => 
-						<ListItem>{name}</ListItem>)}
-				</List>
+				<div className="container">
+					<TextField className="SearchBox" id="outlined-basic" value={this.state.textbox} onChange={this.updateTextBox} variant="outlined" />
+					<div className="SearchButton" onClick={this.makeRequest}>
+						Search
+					</div>
+				</div>
+				{this.state.hasMadeRequest ? 
+				this.renderResults() 
 				:
 				null
 				}

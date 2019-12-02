@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import {
 	BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'; 
-import './App.scss';
+import './App.css';
 import QueryPage from './Components/QueryPage';
 import Home from './Components/Home'
+import clout from './clout.png';
+import Rclout from './Rclout.png';
 
 class App extends Component {
+
+	constructor() {
+		super()
+		this.state = {image: clout}
+	}
 
 	cfcdata = {
 		endpoint: 'get-creator-from-creator?creator=',
@@ -24,34 +31,45 @@ class App extends Component {
 		titleString: 'Find tags that are generally assiciated with a specific tag',
 	}
 
+	marqueeProps = {className: "Marquee", truespeed:"true", scrolldelay: "30", direction: "right", scrollamount: "7", behavior: "alternate", onfinish: this.flipImage}
+
+	flipImage = () => {
+		this.setState({image: Rclout});
+	}
+
 	render() {
 		return (
 			<div className="App">
-			 <Router>
-
-				 <div><Link to="/">Home</Link></div>
-				 <div><Link to="/CreatorsFromCreator">Creator From Creator</Link></div>
-				 <div><Link to="/CreatorsFromTag">Creator From Tag</Link></div>
-				 <div><Link to="/TagsFromCreator">Tag from Creator</Link></div>
-				 <div><Link to="/TagsFromTag">Tag From Tag</Link></div>
-				 <Switch>
-					<Route exact path="/">
-						<Home />
-					</Route>
-					<Route path="/CreatorsFromCreator">
-						<QueryPage {...this.cfcdata}/>
-					</Route>
-					<Route path="/CreatorsFromTag">
-						<QueryPage {...this.cftdata}/>
-					</Route>
-					<Route path="/TagsFromCreator">
-						<QueryPage {...this.tfcdata}/>
-					</Route>
-					<Route path="/TagsFromTag">
-						<QueryPage {...this.tftdata}/>
-					</Route>
-				 </Switch>
-			 </Router> 
+				<marquee {...this.marqueeProps}>
+					<div className="MQItem">CLOUD</div>
+					<div className="MQItem"><img alt="CloudClout mascot" src={this.state.image}></img></div>
+					<div className="MQItem">CLOUT</div>
+				</marquee>
+				<Router>
+					<div className="HeaderNav">
+						<Link className="NavItem" to="/CreatorsFromCreator">Creator From Creator</Link>
+						<Link className="NavItem" to="/CreatorsFromTag">Creator From Tag</Link>
+						<Link className="NavItem" to="/TagsFromCreator">Tag from Creator</Link>
+						<Link className="NavItem" to="/TagsFromTag">Tag From Tag</Link>
+					</div>
+					<Switch>
+						<Route exact path="/">
+							<Home />
+						</Route>
+						<Route path="/CreatorsFromCreator">
+							<QueryPage {...this.cfcdata}/>
+						</Route>
+						<Route path="/CreatorsFromTag">
+							<QueryPage {...this.cftdata}/>
+						</Route>
+						<Route path="/TagsFromCreator">
+							<QueryPage {...this.tfcdata}/>
+						</Route>
+						<Route path="/TagsFromTag">
+							<QueryPage {...this.tftdata}/>
+						</Route>
+					</Switch>
+			 	</Router> 
 			</div>
 		);
 	}

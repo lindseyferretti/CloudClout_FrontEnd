@@ -1,0 +1,33 @@
+.App {
+  text-align: center;
+}
+.HeaderNav {
+  display: flex;
+  flex-direction: row; 
+  justify-content: center;
+  background-color: #333;
+}
+.NavItem {
+  display: flex;
+  padding: 12px;
+  color: yellowgreen;
+  text-decoration: none;
+}
+.NavItem:hover{
+  background-color: yellowgreen;
+  color: #333;
+}
+.Marquee {
+  background-color: #333;
+  color: yellowgreen;
+  margin-bottom: -5px;
+  font-size: 72px;
+  font-weight: bolder;
+  letter-spacing: 6px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+.MQItem {
+  display: inline-flex;
+}
